@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Am I Cooked? 🍳</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Am I Cooked? 🍳</h1>
+        <p class="subtitle">Enter your raw marks. Find out your fate.</p>
+
+        <div class="input-group">
+            <input type="number" step="0.5" id="marks_got" placeholder="You Got">
+            <span class="divider">/</span>
+            <input type="number" step="0.5" id="marks_total" placeholder="Total">
+        </div>
+
+        <button onclick="calculateFate()">CHECK MY FATE</button>
+
+        <div class="result-box" id="result-box" style="display:none">
+            <h2 id="status-text">STATUS</h2>
+            <p class="roast-text" id="roast-text"></p>
+        </div>
+    </div>
+
+<script>
+        const MESSAGES = {
+            "academic_weapon": [
+                "Go touch grass immediately.",
+                "You definitely remind the teacher to collect homework.",
+                "Harvard called, they told you to chill.",
+                "You actually do homework? Couldn't be me.",
+                "Harvard should be calling anytime soon!",
+                "Notice how your friends only text you when the assignment is due?",
+                "Hey... could you help me by chance? (Just kidding, nerd).",
+                "Good job! I guess... if you like that sort of thing.",
+                "What a nerd. Get a life.",
+                "So uhh... doctor or lawyer? Maybe engineer?",
+                "Unlike this website, you seem to be coded very well!",
+                "I wish I was you... actually, no I don't. I like sleep.",
+                "Who's seeing these grades?? Oh shoot... uhhh you're really cool!",
+                "You seem like the person who unironically enjoys standardized testing."
+            ],
+            "mid": [
+                "NPC energy. You just exist.",
+                "You thought you did well, but your parents are still disappointed.",
+                "You are strictly average. Congratulations.",
+                "We're all with you, gang. Middle of the pack.",
+                "Future 9-5 warrior right here.",
+                "I really hope you have patience for terrible bosses.",
+                "Well, you're not going to be rich, that's for sure.",
+                "C's get degrees? Nah bro, it's competitive out here. LOCK IN.",
+                "Insert motivational text here to let user know they're cooked.",
+                "Dude, just do better. It's not that hard.",
+                "Are you planning on being a background character in your own life?",
+                "Not homeless, but not rich. Maybe a sheep?",
+                "You seem to think this is acceptable? AIM TO IMPROVE!",
+                "You are not stupid... just not smart either.",
+                "Okay bro, just lock in... please.",
+                "I'm running out of insults because you're so boring.",
+                "Do you just ask your smart friends for answers all the time?",
+                "Well, at least you ain't getting whooped tonight.",
+                "This is so mid it actually hurts."
+            ],
+            "cooked": [
+                "It’s over for you bro. 💀",
+                "McDonald's is hiring. I sent them your resume.",
+                "Don't even study for the final, just pray.",
+                "Dude, your 14 hours of screen time isn't helping...",
+                "Are you even putting in effort, or are you trying to fail?",
+                "Holy... you are stupid. I GUESSED IT!",
+                "Do your friends automatically assume you're failing?",
+                "For the love of god, start studying.",
+                "I don't think McDonald's even accepted you for an interview bro...",
+                "Bro, just go into construction already.",
+                "You're just as smart and well-coded as this website! (That's an insult).",
+                "Your 3 brain cells are all competing for second place.",
+                "I love how you don't let facts interfere with your opinion.",
+                "Bro, I don't even think you can guess that badly...",
+                "You're the reason they added the multiple-choice system.",
+                "Soooo... how many hours of doom scrolling last night?",
+                "A goldfish would make more money than you right now.",
+                "Might as well apply for a factory job...",
+                "You'd be amazing at manual repetitive labor. Brick laying perhaps?",
+                "Dude, lock in. LIKE BADLY.",
+                "Cooked. Burnt. Charred. Ash.",
+                "At this point, I DON'T KNOW WHAT TO WRITE!",
+                "Just put the fries in the bag, bro."
+            ]
+        };
+
+        function calculateFate() {
+            var gotValue = document.getElementById("marks_got").value;
+            var totalValue = document.getElementById("marks_total").value;
+
+            var got = parseFloat(gotValue);
+            var total = parseFloat(totalValue);
+
+            if (isNaN(got) || isNaN(total)) {
+                alert("Please enter numbers");
+                return;
+            }
+
+            if (total == 0) {
+                alert("Total cannot be zero");
+                return;
+            }
+
+            var percent = (got / total) * 100;
+            percent = percent.toFixed(1);
+
+            var status = "";
+
+            if (percent >= 90) {
+                status = "academic_weapon";
+            } else if (percent >= 70) {
+                status = "mid";
+            } else {
+                status = "cooked";
+            }
+
+            document.body.className = "";
+            document.body.className = status;
+
+            var roastArray = messages[status];
+            var randomIndex = Math.floor(Math.random() * roastArray.length);
+            var roast = roastArray[randomIndex];
+
+            document.getElementById("status-text").innerText =
+                status.replace("_", " ").toUpperCase();
+
+            document.getElementById("roast-text").innerText =
+                "You got " + percent + "%. " + roast;
+
+            document.getElementById("result-box").style.display = "block";
+        }
+    </script>
+</body>
+</html>
