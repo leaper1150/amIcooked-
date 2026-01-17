@@ -21,11 +21,11 @@
         <button onclick="calculateFate()">CHECK MY FATE</button>
 
         <div class="result-box" id="result-box" style="display:none">
-            <h2 id="status-text">STATUS</h2>
+            <h2 id="status-text"></h2>
             <p class="roast-text" id="roast-text"></p>
         </div>
     </div>
-    
+
 <script>
         const MESSAGES = {
             "academic_weapon": [
@@ -60,24 +60,24 @@
         };
 
         function calculateFate() {
-            var gotValue = document.getElementById("marks_got").value;
-            var totalValue = document.getElementById("marks_total").value;
+            var gotInput = document.getElementById("marks_got");
+            var totalInput = document.getElementById("marks_total");
 
-            var got = parseFloat(gotValue);
-            var total = parseFloat(totalValue);
+            var got = parseFloat(gotInput.value);
+            var total = parseFloat(totalInput.value);
 
             if (isNaN(got) || isNaN(total)) {
-                alert("Please enter numbers");
+                alert("Enter numbers bro");
                 return;
             }
 
-            if (total == 0) {
-                alert("Total cannot be zero");
+            if (total === 0) {
+                alert("Total can't be zero");
                 return;
             }
 
             var percent = (got / total) * 100;
-            percent = percent.toFixed(1);
+            percent = Math.round(percent * 10) / 10;
 
             var status = "";
 
@@ -89,12 +89,11 @@
                 status = "cooked";
             }
 
-            document.body.className = "";
             document.body.className = status;
 
-            var roastArray = messages[status];
-            var randomIndex = Math.floor(Math.random() * roastArray.length);
-            var roast = roastArray[randomIndex];
+            var roastList = messages[status];
+            var randomIndex = Math.floor(Math.random() * roastList.length);
+            var roast = roastList[randomIndex];
 
             document.getElementById("status-text").innerText =
                 status.replace("_", " ").toUpperCase();
