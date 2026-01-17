@@ -27,6 +27,7 @@
     </div>
 
 <script>
+        // CAPITAL "MESSAGES"
         const MESSAGES = {
             academic_weapon: [
                 "Go touch grass immediately.",
@@ -91,14 +92,17 @@
 
             document.body.className = status;
 
-            var roastList = messages[status];
+            // --- THE FIX IS HERE ---
+            // Changed 'messages' to 'MESSAGES'
+            var roastList = MESSAGES[status]; 
+            
             var randomIndex = Math.floor(Math.random() * roastList.length);
             var roast = roastList[randomIndex];
 
-            document.getElementById("status-text").innerText =
+            document.getElementById("status-text").innerText = 
                 status.replace("_", " ").toUpperCase();
 
-            document.getElementById("roast-text").innerText =
+            document.getElementById("roast-text").innerText = 
                 "You got " + percent + "%. " + roast;
 
             document.getElementById("result-box").style.display = "block";
