@@ -27,7 +27,6 @@
     </div>
 
 <script>
-        // CAPITAL "MESSAGES"
         const MESSAGES = {
             academic_weapon: [
                 "Go touch grass immediately.",
@@ -92,8 +91,7 @@
 
             document.body.className = status;
 
-            // --- THE FIX IS HERE ---
-            // Changed 'messages' to 'MESSAGES'
+           
             var roastList = MESSAGES[status]; 
             
             var randomIndex = Math.floor(Math.random() * roastList.length);
